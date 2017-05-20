@@ -22,6 +22,7 @@ public class ManageModel {
         NodeModel base = new NodeModel();
         base.setBounds(20, 60, 450, 300);
         base.setType("JFrame");
+        base.plusFrameCnt();
         base.setName("frame" + base.getFrameCnt());
         base.setText(base.getName());
         return base;
@@ -44,7 +45,6 @@ public class ManageModel {
         HFrame panel = (HFrame)ManageModel.parseModel(model, null);
         editorPanel.setFrame(panel);
         editorPanel.setFile(file);
-        editorPanel.setNodeModel(model);
         editorPanel.setFileNameLabel(file.getName());
     }
 
@@ -58,13 +58,16 @@ public class ManageModel {
             frame.setLayout(null);
             contentPane = frame;
             result = frame;
+            frame.countName.setFrameCnt(model.getFrameCnt());
+            frame.countName.setButtonCnt(model.getButtonCnt());
+            frame.countName.setLabelCnt(model.getLabelCnt());
         }
-        else if(model.getType().equals("JPanel")) {
-            JPanel panel = new JPanel();
-            panel.setLayout(null);
-            contentPane = panel;
-            result = panel;
-        }
+//        else if(model.getType().equals("JPanel")) {
+//            JPanel panel = new JPanel();
+//            panel.setLayout(null);
+//            contentPane = panel;
+//            result = panel;
+//        }
         else if(model.getType().equals("JButton")) {
             JButton btn = new JButton();
             btn.setText(model.getText());
@@ -98,12 +101,19 @@ public class ManageModel {
         NodeModel base = new NodeModel();
         NodeModel temp = null;
         Component [] children = null;
+       
         
         base.setBounds(element.getBounds());
         base.setName(element.getName());
         base.setType(element.getClass().getSimpleName());
-        if(base.getType().equals("HFrame"))
+        if(base.getType().equals("HFrame")){
+            HFrame frame = (HFrame)element;
             base.setType("JFrame");
+            base.setFrameCnt(frame.countName.getFrameCnt());
+            base.setButtonCnt(frame.countName.getButtonCnt());
+            base.setLabelCnt(frame.countName.getLabelCnt());
+//            base.setPanelCnt(frame.countName.getPanelCnt());
+        }
         
         if(element.getParent()!=null)
             base.setParentName(element.getParent().getName());
@@ -114,9 +124,9 @@ public class ManageModel {
             HFrame frame = (HFrame)element;
             base.setText(frame.getTitle());
         }
-        else if(base.getType().equals("JPanel")) {
-            //JPanel은 text설정 안해도댐
-        }
+//        else if(base.getType().equals("JPanel")) {
+//            //JPanel은 text설정 안해도댐
+//        }
         else if(base.getType().equals("JButton")) {
             JButton btn = (JButton)element;
             base.setText(btn.getText());
@@ -147,48 +157,7 @@ public class ManageModel {
         return base;
     }
     
-//    public static void main(String [] args) {
-//        NodeModel base = ManageModel.createFirstModel();
-//        NodeModel temp ;
-//        NodeModel btn = new NodeModel();
-//        btn.setBounds(20,20,100,20);
-//        btn.setType("JButton");
-//        btn.setName("button1");
-//        btn.setText("hello~");
-//        btn.setParentName(base.getName());
-//        base.setChild(btn);
-//        NodeModel lbl = new NodeModel();
-//        lbl.setBounds(130,20,60,20);
-//        lbl.setType("JLabel");
-//        lbl.setName("label1");
-//        lbl.setText("iamlabel");
-//        lbl.setParentName(btn.getParentName());
-//        btn.setSibling(lbl);  
-//        
-//        NodeModel panel = new NodeModel();
-//        panel.setBounds(300,100,100,100);
-//        panel.setType("JPanel");
-//        panel.setName("panel1");
-//        panel.setParentName(btn.getParentName());
-//        lbl.setSibling(panel);  
-//        
-//        NodeModel lbl2 = new NodeModel();
-//        lbl2.setBounds(0,20,50,20);
-//        lbl2.setType("JLabel");
-//        lbl2.setName("label2");
-//        lbl2.setText("hello???");
-//        lbl2.setParentName(panel.getName());
-//        panel.setChild(lbl2);  
-//        
-//        Gson gson = new Gson();
-//        String output = gson.toJson(base);
-//        System.out.println("parse before: \n" + output);
-//        JFrame frame = (JFrame)ManageModel.parseModel(base, null);
-//        NodeModel test = ManageModel.parseComponent(frame, null);
-//        output = gson.toJson(test);
-//        System.out.println("parse after: \n" + output);
-//        JFrame frame2 = (JFrame)ManageModel.parseModel(test, null);
-//    }
+
     
     
 }

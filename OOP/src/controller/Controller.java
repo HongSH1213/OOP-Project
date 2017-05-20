@@ -36,12 +36,13 @@ public class Controller {
 	}
 	public void openFunction() {
 	    int ret = chooser.showOpenDialog(null);
+	    if(ret!=JFileChooser.APPROVE_OPTION)
+	        return ;
+	    
 	    File file = new File(chooser.getSelectedFile().getPath());
 	    FileReader fin = null;
 	    Gson gson = new Gson();
 	    StringBuffer buffer = new StringBuffer();
-	    if(ret!=JFileChooser.APPROVE_OPTION)
-	        return ;
 	    
 	    try {
             fin = new FileReader(file);
@@ -57,11 +58,15 @@ public class Controller {
 	    ManageModel.openModel(model, file, editorPanel);
 	}
 	public void saveFunction() {
+	    if(editorPanel.getFrame() == null)
+	        return;
 	    NodeModel model = ManageModel.parseComponent(editorPanel.getFrame(), null);
         File file = editorPanel.getFile();
 	    ManageModel.saveModel(model, file);
 	}
 	public void saveAsFunction() {
+	    if(editorPanel.getFrame() == null)
+            return;
 	    int ret = chooser.showSaveDialog(null);
 	    File file = null;
 	    if(ret!=JFileChooser.APPROVE_OPTION)

@@ -31,6 +31,7 @@ public class GuiBuilder extends JFrame{
         propertiesPanel = new PropertiesPanel();
         palettePanel = new PalettePanel();
 		controller = new Controller(editorPanel,propertiesPanel,palettePanel);
+		palettePanel.setEditorPanel(editorPanel);
 		setTitle("OOP");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(1000,1000));
@@ -186,7 +187,7 @@ public class GuiBuilder extends JFrame{
 	
 	
 	Container contentPane;
-	controller.Controller controller;
+	Controller controller;
 	
 	private JMenuBar menuBar;
 	private JMenu fileMenu;

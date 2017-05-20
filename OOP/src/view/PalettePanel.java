@@ -63,6 +63,12 @@ public class PalettePanel extends JPanel {
         repaint();
         
     }
+    public void setEditorPanel(EditorPanel editorPanel) {
+        this.editorPanel = editorPanel;
+    }
+    public EditorPanel getEditorPanel() {
+        return editorPanel;
+    }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawLine(0, 25, this.getWidth(), 25);       
@@ -71,6 +77,9 @@ public class PalettePanel extends JPanel {
         g.fillRect(0, 0, 300, 24);
         g.fillRect(0,110,300,20);
     } 
+    /*
+     * 라벨 선택부분
+     */
     private class MyMouseListener extends MouseAdapter{
         @Override
         public void mouseEntered(MouseEvent e) {
@@ -86,15 +95,18 @@ public class PalettePanel extends JPanel {
         }
         @Override
         public void mouseClicked(MouseEvent e) {
+            if(editorPanel.getFile() == null)
+                return;
             if(selectedItem != null) {
                 selectedItem.setBackground(backGroundColor);
                 selectedItem = null;
+                editorPanel.makeItem(null);
                 return ;
             }
             JLabel lbl = (JLabel)e.getSource();
             lbl.setBackground(selectedColor);
             selectedItem = lbl;
-            
+            editorPanel.makeItem(selectedItem);
         }        
         
     }
@@ -110,4 +122,5 @@ public class PalettePanel extends JPanel {
     private Color chooseColor;
     private Color selectedColor;
     private JLabel selectedItem;
+    private EditorPanel editorPanel;
 }

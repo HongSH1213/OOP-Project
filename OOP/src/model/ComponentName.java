@@ -7,29 +7,50 @@ public class ComponentName {
     private int panelCnt=0;
     
     public int getFrameCnt() {
-        return ++frameCnt;
+        return frameCnt;
     }
     public int getButtonCnt() {
-        return ++buttonCnt;
+        return buttonCnt;
     }
     public int getLabelCnt() {
-        return ++labelCnt;
+        return labelCnt;
     }
-    public int getPanelCnt() {
-        return --panelCnt;
+//    public int getPanelCnt() {
+//        return --panelCnt;
+//    }
+    public void plusFrameCnt() {
+        ++frameCnt;
     }
-    public int disFrameCnt() {
-        return --frameCnt;
+    public void plusButtonCnt() {
+        ++buttonCnt;
     }
-    public int disButtonCnt() {
-        return --buttonCnt;
+    public void plusLabelCnt() {
+        ++labelCnt;
     }
-    public int disLabelCnt() {
-        return --labelCnt;
+    public void disFrameCnt() {
+        --frameCnt;
     }
-    public int disPanelCnt() {
-        return --panelCnt;
+    public void disButtonCnt() {
+        --buttonCnt;
     }
+    public void disLabelCnt() {
+        --labelCnt;
+    }
+//    public int disPanelCnt() {
+//        return --panelCnt;
+//    }
+    public void setFrameCnt(int cnt) {
+        frameCnt=cnt;
+    }
+    public void setButtonCnt(int cnt) {
+        buttonCnt=cnt;
+    }
+    public void setLabelCnt(int cnt) {
+        labelCnt=cnt;
+    }
+//    public void setPanelCnt(int cnt) {
+//        panelCnt=cnt;
+//    }
     
     
 }
