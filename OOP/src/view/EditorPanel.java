@@ -1,5 +1,6 @@
 package view;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -10,8 +11,8 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.ItemMouseListener;
 import model.HFrame;
-import model.NodeModel;
 
 public class EditorPanel extends JPanel{
     EditorPanel() {
@@ -24,27 +25,7 @@ public class EditorPanel extends JPanel{
         
         
     }
-//    private class MyMouseListener extends MouseAdapter {
-//        @Override
-//        public void mouseMoved(MouseEvent e) {
-//            if(item != null){
-//                item.setLocation(e.getX()+1,e.getY()+1);
-//                panel.add(item);
-//                
-//            }
-//        }
-//        @Override
-//        public void mouseExited(MouseEvent e) {
-//            if(item != null){
-//                    panel.remove(item);
-//                    panel.repaint();
-//            }
-//        }
-////        public void mouseClicked(MouseEvent e) {
-////            System.out.println(e.getX() + " " + e.getY());
-////        }
-//        
-//    }
+   
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawLine(0, 40, this.getWidth(), 40);
@@ -56,6 +37,12 @@ public class EditorPanel extends JPanel{
             remove(this.frame);
         }
         this.frame = frame;
+        Component [] list = frame.getComponents();
+        for(int i=0;i<frame.getComponentCount();++i) {
+            list[i].addMouseListener(temp);
+            list[i].addMouseMotionListener(temp);
+        }
+        
         backgroundPanel = new JPanel();
         backgroundPanel.setBounds(frame.getX()-2, frame.getY()-2, frame.getWidth()+4, frame.getHeight()+4);
         backgroundPanel.setBackground(Color.CYAN);
@@ -100,10 +87,15 @@ public class EditorPanel extends JPanel{
         frame.setFlag(true);
     }
     public void addItem(Rectangle info) {
+        
+        item.addMouseListener(temp);
+        item.addMouseMotionListener(temp);
         item.setBounds(info);
         frame.add(item);
         type.setBackground(backGroundColor);
     }
+    
+    ItemMouseListener temp = new ItemMouseListener();
     private Color backGroundColor = new Color(240,240,240);
     private JLabel fileNameLabel;
     private JPanel backgroundPanel;

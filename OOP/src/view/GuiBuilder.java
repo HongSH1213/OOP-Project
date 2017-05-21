@@ -160,9 +160,6 @@ public class GuiBuilder extends JFrame{
 		paletteScrollPane = new JScrollPane(palettePanel);
 		propertiesScrollPane = new JScrollPane(propertiesPanel);
 		
-		//test
-		propertiesPanel.setBackground(Color.BLUE);
-		//end of test
 		
 		contentPane.add(editorScrollPane, BorderLayout.CENTER);
 		contentPane.add(paletteAndPropertiesPanel, BorderLayout.EAST);
