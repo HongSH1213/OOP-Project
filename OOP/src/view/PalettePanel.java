@@ -2,6 +2,8 @@ package view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -16,6 +18,15 @@ public class PalettePanel extends JPanel {
         selectedColor = new Color(192, 220, 243);
         defaultFont = new Font("Nirmala UI Semilight",Font.PLAIN,20);
         myListener = new MyMouseListener();
+        KeyAdapter myKeyListener = new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ESCAPE && selectedItem!=null) {
+                    selectedItem.setBackground(backGroundColor);
+                    selectedItem = null;
+                    editorPanel.makeItem(null);
+                }
+         }
+        };
         setBackground(backGroundColor);
         
         titleContainers = new JLabel("Swing Containers");
@@ -30,6 +41,7 @@ public class PalettePanel extends JPanel {
         jPanel.setOpaque(true);
         jPanel.setBackground(backGroundColor);
         jPanel.addMouseListener(myListener);
+//        jPanel.addKeyListener(myKeyListener);
         
         
         titleContainers2 = new JLabel("Swing Controls");
@@ -44,6 +56,7 @@ public class PalettePanel extends JPanel {
         jButton.setOpaque(true);
         jButton.setBackground(backGroundColor);
         jButton.addMouseListener(myListener);
+        jButton.addKeyListener(myKeyListener);
         
         jLabel = new JLabel("JLabel");
         jLabel.setFont(defaultFont);
@@ -51,7 +64,7 @@ public class PalettePanel extends JPanel {
         jLabel.setOpaque(true);
         jLabel.setBackground(backGroundColor);
         jLabel.addMouseListener(myListener);
-        
+        jLabel.addKeyListener(myKeyListener);
         
         
         add(titleContainers);
@@ -99,7 +112,7 @@ public class PalettePanel extends JPanel {
         }
         @Override
         public void mouseClicked(MouseEvent e) {
-            if(editorPanel.getFile() == null)
+            if(editorPanel.getFile() == null || ((JLabel)e.getSource()).getText().equals("JPanel"))
                 return;
             if(editorPanel.getSuccess()==true) {
                 selectedItem = null;
@@ -113,12 +126,13 @@ public class PalettePanel extends JPanel {
             }
             JLabel lbl = (JLabel)e.getSource();
             lbl.setBackground(selectedColor);
+            lbl.requestFocus();
             selectedItem = lbl;
             editorPanel.makeItem(selectedItem);
             editorPanel.setSuccess(false);
         }        
-        
     }
+    
     
     private JLabel titleContainers;
     private JLabel titleContainers2;
