@@ -10,8 +10,7 @@ import com.google.gson.Gson;
 
 import model.NodeModel;
 import view.EditorPanel;
-import view.PalettePanel;
-import view.PropertiesPanel;
+import view.GuiBuilder;
 
 public class Controller {
     private EditorPanel editorPanel;
@@ -22,9 +21,11 @@ public class Controller {
     private FileNameExtensionFilter javaFilter;
     private ManageJava javaManager;
     private String desktop;
+    private GuiBuilder gui;
 
-    public Controller(EditorPanel editorPanel) {
+    public Controller(EditorPanel editorPanel, GuiBuilder gui) {
         this.editorPanel = editorPanel;
+        this.gui = gui;
         desktop= System.getProperty("user.home") + "\\Desktop";
         newDialog = new NewFunctionDialog(editorPanel);
         chooser = new JFileChooser(desktop);
@@ -41,6 +42,8 @@ public class Controller {
     public void newFunction() {
         newDialog.setVisible(true);
         newDialog.resetDialog();
+        if(editorPanel.getFile()!=null)
+            gui.setVisibleButton();
     }
 
     public void openFunction() {
@@ -65,6 +68,7 @@ public class Controller {
         }
         NodeModel model = gson.fromJson(buffer.toString(), NodeModel.class);
         ManageModel.openModel(model, file, editorPanel);
+        gui.setVisibleButton();
     }
 
     public void saveFunction() {

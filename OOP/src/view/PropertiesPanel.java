@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -200,20 +201,42 @@ public class PropertiesPanel extends JPanel {
     }
 
     private class StringKeyListener extends KeyAdapter {
+        private String regExp = "[a-zA-Z|$|_][\\w|_|$]*";
+        private boolean ok;
+
         @Override
         public void keyReleased(KeyEvent e) {
             if (e.getKeyCode() != 10)
                 return;
             JTextField temp = (JTextField) e.getSource();
             if (temp.getName().equals("name")) {
-                item.setName(temp.getText());
+                ok = Pattern.matches(regExp, temp.getText());
+                if (ok)
+                    item.setName(temp.getText());
+                else {
+                    JOptionPane.showMessageDialog(null, "Wrong name.", "error", JOptionPane.ERROR_MESSAGE);
+                    temp.setText(item.getName());
+                }
+
             } else if (temp.getName().equals("text")) {
-                if (item.getClass().getSimpleName().equals("HFrame")) {
-                    ((HFrame) item).setTitle(temp.getText());
-                } else if (item.getClass().getSimpleName().equals("JButton")) {
-                    ((JButton) item).setText(temp.getText());
-                } else if (item.getClass().getSimpleName().equals("JLabel")) {
-                    ((JLabel) item).setText(temp.getText());
+                ok = Pattern.matches("[\\w]+", temp.getText());
+                if (ok) {
+                    if (item.getClass().getSimpleName().equals("HFrame")) {
+                        ((HFrame) item).setTitle(temp.getText());
+                    } else if (item.getClass().getSimpleName().equals("JButton")) {
+                        ((JButton) item).setText(temp.getText());
+                    } else if (item.getClass().getSimpleName().equals("JLabel")) {
+                        ((JLabel) item).setText(temp.getText());
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong text.", "error", JOptionPane.ERROR_MESSAGE);
+                    if (item.getClass().getSimpleName().equals("HFrame")) {
+                        temp.setText(((HFrame) item).getTitle());
+                    } else if (item.getClass().getSimpleName().equals("JButton")) {
+                        temp.setText(((JButton) item).getText());
+                    } else if (item.getClass().getSimpleName().equals("JLabel")) {
+                        temp.setText(((JLabel) item).getText());
+                    }
                 }
             }
             // JOptionPane.showMessageDialog(null,

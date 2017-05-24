@@ -34,7 +34,7 @@ public class GuiBuilder extends JFrame {
         editorPanel = new EditorPanel();
         propertiesPanel = new PropertiesPanel();
         palettePanel = new PalettePanel();
-        controller = new Controller(editorPanel);
+        controller = new Controller(editorPanel, this);
         palettePanel.setEditorPanel(editorPanel);
         propertiesPanel.setEditorPanel(editorPanel);
         setTitle("OOP");
@@ -128,7 +128,7 @@ public class GuiBuilder extends JFrame {
         saveAsIcon = new ImageIcon("images/saveas_icon.png");
         createJavaIcon = new ImageIcon("images/java.png");
         exitIcon = new ImageIcon("images/exit.png");
-
+        
         newButton = new JButton(newIcon);
         newButton.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         openButton = new JButton(openIcon);
@@ -141,6 +141,10 @@ public class GuiBuilder extends JFrame {
         createJavaButton.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         exitButton = new JButton(exitIcon);
         exitButton.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        
+        saveButton.setEnabled(false);
+        saveAsButton.setEnabled(false);
+        createJavaButton.setEnabled(false);
 
         // 툴바 고정
         toolBar.setFloatable(false);
@@ -204,9 +208,15 @@ public class GuiBuilder extends JFrame {
                                 Short.MAX_VALUE));
 
     }
+    
+    public void setVisibleButton() {
+        saveButton.setEnabled(true);
+        saveAsButton.setEnabled(true);
+        createJavaButton.setEnabled(true);
+    }
 
-    Container contentPane;
-    Controller controller;
+    private Container contentPane;
+    private Controller controller;
 
     private JMenuBar menuBar;
     private JMenu fileMenu;
