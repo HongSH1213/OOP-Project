@@ -1,6 +1,8 @@
 package model;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Rectangle;
 
 public class ModelInfo extends ComponentName {
     private int x, y;
@@ -9,6 +11,8 @@ public class ModelInfo extends ComponentName {
     private String name;
     private String text;
     private String parentName;
+    private int RGB;
+    
 
     public void setBounds(int x, int y, int width, int height) {
         this.x = x;
@@ -57,7 +61,11 @@ public class ModelInfo extends ComponentName {
     public void setParentName(String parentName) {
         this.parentName = parentName;
     }
-
+    
+    public void setColor(Color color) {
+        RGB = color.getRGB();
+    }
+    
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
@@ -96,6 +104,10 @@ public class ModelInfo extends ComponentName {
 
     public String getParentName() {
         return parentName;
+    }
+    
+    public Color getColor() {
+        return new Color(RGB);
     }
 
 }

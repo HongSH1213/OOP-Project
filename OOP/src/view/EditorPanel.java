@@ -147,9 +147,12 @@ public class EditorPanel extends JPanel {
         if (type.getText().equals("JLabel")) {
             frame.countName.plusLabelCnt();
             ((JLabel) item).setHorizontalAlignment(JLabel.CENTER);
+            item.setBackground(new Color(255,255,102));
         } else if (type.getText().equals("JButton")) {
             frame.countName.plusButtonCnt();
+            item.setBackground(new Color(0,255,255));
         }
+        item.setOpaque(true);
         ItemKeyListener itemKeyListener = new ItemKeyListener();
         itemKeyListener.setPanel(this, propertiesPanel);
         item.addMouseListener(itemMouseListener);

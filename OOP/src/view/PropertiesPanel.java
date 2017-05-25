@@ -1,6 +1,8 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.util.regex.Pattern;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -24,7 +27,7 @@ import model.HFrame;
 public class PropertiesPanel extends JPanel {
 	public PropertiesPanel() {
 		Font defaultFont = new Font("Nirmala UI Semilight", Font.PLAIN, 30);
-		setLayout(new GridLayout(7, 2, 0, 5));
+		setLayout(new GridLayout(8, 2, 0, 5));
 		String[] types = { "JButton", "JLabel", "JFrame" };
 		itemMouseListener = new ItemMouseListener();
 		itemKeyListener = new ItemKeyListener();
@@ -71,6 +74,17 @@ public class PropertiesPanel extends JPanel {
 		heightTextField.setEnabled(false);
 		heightTextField.addKeyListener(intKeyListener);
 		heightTextField.setName("height");
+		colorLabel = new JLabel("Color :");
+		colorLabel.setFont(defaultFont);
+		colorTypeLabel = new JLabel();
+		colorTypeLabel.setPreferredSize(new Dimension(80,40));
+		colorButton = new JButton("...");
+		colorActionListener = new ColorActionListener();
+		colorButton.addActionListener(colorActionListener);
+		JPanel temp = new JPanel();
+		temp.add(colorTypeLabel);
+		temp.add(colorButton);
+		
 		setFalse(); // 초기에는 선택 안되게
 		add(typeLabel);
 		add(typeBox);
@@ -86,6 +100,8 @@ public class PropertiesPanel extends JPanel {
 		add(widthTextField);
 		add(heightLabel);
 		add(heightTextField);
+		add(colorLabel);
+		add(temp);
 	}
 
 	public void setProperties(JComponent comp) {
@@ -123,7 +139,7 @@ public class PropertiesPanel extends JPanel {
 		yTextField.setText(Integer.toString(comp.getY()));
 		widthTextField.setText(Integer.toString(comp.getWidth()));
 		heightTextField.setText(Integer.toString(comp.getHeight()));
-
+		colorTypeLabel.setText(comp.getBackground().getRed()+" "+comp.getBackground().getGreen()+" "+comp.getBackground().getBlue());
 	}
 
 	private void setFalse() {
@@ -143,6 +159,8 @@ public class PropertiesPanel extends JPanel {
 		widthTextField.setText("");
 		heightTextField.setEnabled(false);
 		heightTextField.setText("");
+		colorTypeLabel.setText("");
+		colorButton.setEnabled(false);
 	}
 
 	private void setTrue() {
@@ -162,8 +180,20 @@ public class PropertiesPanel extends JPanel {
 		widthTextField.setText("");
 		heightTextField.setEnabled(true);
 		heightTextField.setText("");
+		colorTypeLabel.setText("");
+		colorButton.setEnabled(true);
 	}
 
+	private class ColorActionListener implements ActionListener {
+	    public void actionPerformed(ActionEvent e) {
+	        Color selectedColor = JColorChooser.showDialog(null, "Choose Color", Color.YELLOW);
+	        if(selectedColor == null)
+	            return;
+	        item.setBackground(selectedColor);
+	        colorTypeLabel.setText(item.getBackground().getRed()+" "+item.getBackground().getGreen()+" "+item.getBackground().getBlue());
+	    }
+	}
+	
 	private class IntKeyListener extends KeyAdapter {
 		@Override
 		public void keyReleased(KeyEvent e) {
@@ -324,12 +354,17 @@ public class PropertiesPanel extends JPanel {
 	private JTextField widthTextField;
 	private JLabel heightLabel;
 	private JTextField heightTextField;
+	private JLabel colorLabel;
+	private JLabel colorTypeLabel;
+	private JButton colorButton;
 	private JComponent item;
+	
 	private IntKeyListener intKeyListener;
 	private StringKeyListener stringKeyListener;
 	private ComboActionListener comboActionListener;
 	private ItemMouseListener itemMouseListener;
 	private ItemKeyListener itemKeyListener;
+	private ColorActionListener colorActionListener;
 	private EditorPanel editorPanel;
 	private boolean state;
 }

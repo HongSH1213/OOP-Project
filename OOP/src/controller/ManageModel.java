@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.io.File;
@@ -8,7 +9,6 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import com.google.gson.Gson;
 
@@ -25,6 +25,7 @@ public class ManageModel {
         base.plusFrameCnt();
         base.setName("frame" + base.getFrameCnt());
         base.setText(base.getName());
+        base.setColor(new Color(238,238,238));
         return base;
     }
 
@@ -75,11 +76,13 @@ public class ManageModel {
         else if (model.getType().equals("JButton")) {
             JButton btn = new JButton();
             btn.setText(model.getText());
+            btn.setOpaque(true);
             result = btn;
         } else if (model.getType().equals("JLabel")) {
             JLabel lbl = new JLabel();
             lbl.setText(model.getText());
             lbl.setHorizontalAlignment(JLabel.CENTER);
+            lbl.setOpaque(true);
             result = lbl;
         }
         // else if(model.getType().equals("")) {
@@ -87,7 +90,8 @@ public class ManageModel {
         // }
         result.setBounds(model.getBounds());
         result.setName(model.getName());
-
+        result.setBackground(model.getColor());
+        
         if (!model.isChildNull()) // 자식이 있을 떄
             parseModel(model.getChild(), contentPane);
         if (!model.isSiblingNull()) // 형제가 있을 떄
@@ -136,7 +140,8 @@ public class ManageModel {
             JLabel lbl = (JLabel) element;
             base.setText(lbl.getText());
         }
-
+        base.setColor(element.getBackground());
+        
         temp = base;
         for (int i = 0; i < children.length; ++i) {
             parseComponent((Container) children[i], temp);
