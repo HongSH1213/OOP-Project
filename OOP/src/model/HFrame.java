@@ -159,12 +159,17 @@ public class HFrame extends JPanel {
                 // ¾Æ·¡
                 state = 3;
             }
+            else {
+                state = 0;
+            }
 
         }
 
         @Override
         public void mouseDragged(MouseEvent e) {
             if (editorPanel.getSelectedItem() == (JComponent) e.getSource() && me.getFlag() == false) {
+                if(state == 0)
+                    return;
                 int tempX;
                 int tempY;
                 src = (HFrame) e.getSource();
