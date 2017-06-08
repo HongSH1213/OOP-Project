@@ -1,10 +1,6 @@
 package model;
 
 public class ComponentName {
-    private int frameCnt = 0;
-    private int buttonCnt = 0;
-    private int labelCnt = 0;
-    private int panelCnt = 0;
 
     public int getFrameCnt() {
         return frameCnt;
@@ -18,9 +14,6 @@ public class ComponentName {
         return labelCnt;
     }
 
-    // public int getPanelCnt() {
-    // return --panelCnt;
-    // }
     public void plusFrameCnt() {
         ++frameCnt;
     }
@@ -45,9 +38,6 @@ public class ComponentName {
         --labelCnt;
     }
 
-    // public int disPanelCnt() {
-    // return --panelCnt;
-    // }
     public void setFrameCnt(int cnt) {
         frameCnt = cnt;
     }
@@ -59,8 +49,9 @@ public class ComponentName {
     public void setLabelCnt(int cnt) {
         labelCnt = cnt;
     }
-    // public void setPanelCnt(int cnt) {
-    // panelCnt=cnt;
-    // }
+
+    private int frameCnt = 0;
+    private int buttonCnt = 0;
+    private int labelCnt = 0;
 
 }

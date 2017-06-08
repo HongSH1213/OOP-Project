@@ -13,15 +13,6 @@ import view.EditorPanel;
 import view.GuiBuilder;
 
 public class Controller {
-    private EditorPanel editorPanel;
-    private NewFunctionDialog newDialog;
-    private JFileChooser chooser;
-    private JFileChooser javaChooser;
-    private FileNameExtensionFilter filter;
-    private FileNameExtensionFilter javaFilter;
-    private ManageJava javaManager;
-    private String desktop;
-    private GuiBuilder gui;
 
     public Controller(EditorPanel editorPanel, GuiBuilder gui) {
         this.editorPanel = editorPanel;
@@ -112,8 +103,15 @@ public class Controller {
 
     }
 
-    public void exitFunction() {
-        System.exit(0);
-    }
+
+    private EditorPanel editorPanel;
+    private NewFunctionDialog newDialog;
+    private JFileChooser chooser;
+    private JFileChooser javaChooser;
+    private FileNameExtensionFilter filter;
+    private FileNameExtensionFilter javaFilter;
+    private ManageJava javaManager;
+    private String desktop;
+    private GuiBuilder gui;
 
 }

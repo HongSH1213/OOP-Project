@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,17 +22,14 @@ import javax.swing.ToolTipManager;
 
 import controller.Controller;
 
+@SuppressWarnings("serial")
 public class GuiBuilder extends JFrame {
 
-    public GuiBuilder() {
-        initComponents();
-    }
-
     // 생성
-    private void initComponents() {
+    public GuiBuilder() {
         editorPanel = new EditorPanel();
         propertiesPanel = new PropertiesPanel();
-        palettePanel = new PalettePanel();  
+        palettePanel = new PalettePanel();
         controller = new Controller(editorPanel, this);
         palettePanel.setEditorPanel(editorPanel);
         propertiesPanel.setEditorPanel(editorPanel);
@@ -84,7 +80,7 @@ public class GuiBuilder extends JFrame {
         };
         exitActionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controller.exitFunction();
+                System.exit(0);
             }
         };
 
@@ -163,7 +159,7 @@ public class GuiBuilder extends JFrame {
         saveAsButton.setToolTipText("다른 이름으로 저장");
         createJavaButton.setToolTipText("자바 파일 생성");
         exitButton.setToolTipText("종료");
-        
+
         ToolTipManager manager = ToolTipManager.sharedInstance();
         manager.setInitialDelay(200); // 초기 툴팁 출력 지연 시간을 0.2초로 설정
         manager.setDismissDelay(1000); // 툴팁 지속 시간을 1초로 설정

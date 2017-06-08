@@ -21,24 +21,8 @@ import javax.swing.JTextField;
 import model.NodeModel;
 import view.EditorPanel;
 
+@SuppressWarnings("serial")
 public class NewFunctionDialog extends JDialog {
-    private String fileName;
-    private String directory;
-    private String path;
-    private JFileChooser chooser;
-    private JTextField fileNameTextField;
-    private JTextField directoryTextField;
-    private JTextField pathTextField;
-    private JLabel newAndLocationLabel;
-    private JLabel fileNameLabel;
-    private JLabel folderLabel;
-    private JLabel createdFileLabel;
-    private JLabel warningLabel;
-    private JButton browseButton;
-    private JButton finishButton;
-    private JButton cancelButton;
-    private JPanel contentPane;
-    private EditorPanel editorPanel;
 
     public NewFunctionDialog(EditorPanel editorPanel) {
         this.editorPanel = editorPanel;
@@ -200,5 +184,24 @@ public class NewFunctionDialog extends JDialog {
         setLocation(res.width / 2 - 300, res.height / 2 - 175);
         repaint();
     }
+
+    private String fileName;
+    private String directory;
+    private String path;
+    private JFileChooser chooser;
+    private JTextField fileNameTextField;
+    private JTextField directoryTextField;
+    private JTextField pathTextField;
+    private JLabel newAndLocationLabel;
+    private JLabel fileNameLabel;
+    private JLabel folderLabel;
+    private JLabel createdFileLabel;
+    private JLabel warningLabel;
+    private JButton browseButton;
+    private JButton finishButton;
+    private JButton cancelButton;
+    private JPanel contentPane;
+    @SuppressWarnings("unused")
+    private EditorPanel editorPanel;
 
 }

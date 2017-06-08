@@ -33,7 +33,7 @@ public class HFrame extends JPanel {
                 HFrame frame = (HFrame) editorPanel.getFrame();
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     temp.setBorder(null);
-                    if(temp.getClass().getSimpleName().equals("JButton"))
+                    if (temp.getClass().getSimpleName().equals("JButton"))
                         temp.setBorder(BorderFactory.createLineBorder(Color.GRAY));
                     temp.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                     frame.repaint();
@@ -113,7 +113,7 @@ public class HFrame extends JPanel {
 
         @Override
         public void mouseMoved(MouseEvent e) {
-            if (editorPanel.getSelectedItem() != (JComponent) e.getSource()){
+            if (editorPanel.getSelectedItem() != (JComponent) e.getSource()) {
                 ((JComponent) e.getSource()).setCursor(defaultCursor);
                 return;
             }
@@ -153,8 +153,7 @@ public class HFrame extends JPanel {
             } else if ((x >= 0 && x < width - 3) && (y <= height && y >= height - 3)) {
                 // ¾Æ·¡
                 state = 3;
-            }
-            else {
+            } else {
                 state = 0;
             }
 
@@ -163,7 +162,7 @@ public class HFrame extends JPanel {
         @Override
         public void mouseDragged(MouseEvent e) {
             if (editorPanel.getSelectedItem() == (JComponent) e.getSource() && me.getFlag() == false) {
-                if(state == 0)
+                if (state == 0)
                     return;
                 int tempX;
                 int tempY;
@@ -232,7 +231,7 @@ public class HFrame extends JPanel {
             JComponent old = editorPanel.getSelectedItem();
             if (old != null && old != temp) {
                 old.setBorder(null);
-                if(old.getClass().getSimpleName().equals("JButton"))
+                if (old.getClass().getSimpleName().equals("JButton"))
                     old.setBorder(BorderFactory.createLineBorder(Color.GRAY));
                 propertiesPanel.setProperties(null);
             }
@@ -243,7 +242,7 @@ public class HFrame extends JPanel {
         }
 
     }
-    
+
     private String title;
     private boolean flag;
     private Rectangle info = new Rectangle();

@@ -25,7 +25,7 @@ public class ManageModel {
         base.plusFrameCnt();
         base.setName("frame" + base.getFrameCnt());
         base.setText(base.getName());
-        base.setColor(new Color(238,238,238));
+        base.setColor(new Color(238, 238, 238));
         return base;
     }
 
@@ -67,12 +67,6 @@ public class ManageModel {
             frame.countName.setButtonCnt(model.getButtonCnt());
             frame.countName.setLabelCnt(model.getLabelCnt());
         }
-        // else if(model.getType().equals("JPanel")) {
-        // JPanel panel = new JPanel();
-        // panel.setLayout(null);
-        // contentPane = panel;
-        // result = panel;
-        // }
         else if (model.getType().equals("JButton")) {
             JButton btn = new JButton();
             btn.setText(model.getText());
@@ -85,13 +79,10 @@ public class ManageModel {
             lbl.setOpaque(true);
             result = lbl;
         }
-        // else if(model.getType().equals("")) {
-        //
-        // }
         result.setBounds(model.getBounds());
         result.setName(model.getName());
         result.setBackground(model.getColor());
-        
+
         if (!model.isChildNull()) // 자식이 있을 떄
             parseModel(model.getChild(), contentPane);
         if (!model.isSiblingNull()) // 형제가 있을 떄
@@ -118,7 +109,6 @@ public class ManageModel {
             base.setFrameCnt(frame.countName.getFrameCnt());
             base.setButtonCnt(frame.countName.getButtonCnt());
             base.setLabelCnt(frame.countName.getLabelCnt());
-            // base.setPanelCnt(frame.countName.getPanelCnt());
         }
 
         if (element.getParent() != null)
@@ -130,9 +120,6 @@ public class ManageModel {
             HFrame frame = (HFrame) element;
             base.setText(frame.getTitle());
         }
-        // else if(base.getType().equals("JPanel")) {
-        // //JPanel은 text설정 안해도댐
-        // }
         else if (base.getType().equals("JButton")) {
             JButton btn = (JButton) element;
             base.setText(btn.getText());
@@ -141,7 +128,7 @@ public class ManageModel {
             base.setText(lbl.getText());
         }
         base.setColor(element.getBackground());
-        
+
         temp = base;
         for (int i = 0; i < children.length; ++i) {
             parseComponent((Container) children[i], temp);
