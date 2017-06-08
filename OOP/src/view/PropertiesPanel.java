@@ -20,8 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.ItemKeyListener;
-import controller.ItemMouseListener;
 import model.HFrame;
 
 public class PropertiesPanel extends JPanel {

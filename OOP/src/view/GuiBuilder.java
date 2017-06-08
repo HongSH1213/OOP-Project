@@ -25,12 +25,9 @@ import controller.Controller;
 
 public class GuiBuilder extends JFrame {
 
-    public GuiBuilder() {
-        initComponents();
-    }
 
     // »ý¼º
-    private void initComponents() {
+    private void GuiBuilder() {
         editorPanel = new EditorPanel();
         propertiesPanel = new PropertiesPanel();
         palettePanel = new PalettePanel();  

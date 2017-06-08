@@ -15,8 +15,6 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controller.ItemKeyListener;
-import controller.ItemMouseListener;
 import model.HFrame;
 
 public class EditorPanel extends JPanel {
