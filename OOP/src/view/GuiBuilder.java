@@ -33,7 +33,7 @@ public class GuiBuilder extends JFrame {
     private void initComponents() {
         editorPanel = new EditorPanel();
         propertiesPanel = new PropertiesPanel();
-        palettePanel = new PalettePanel();
+        palettePanel = new PalettePanel();  
         controller = new Controller(editorPanel, this);
         palettePanel.setEditorPanel(editorPanel);
         propertiesPanel.setEditorPanel(editorPanel);
@@ -163,7 +163,7 @@ public class GuiBuilder extends JFrame {
         saveAsButton.setToolTipText("다른 이름으로 저장");
         createJavaButton.setToolTipText("자바 파일 생성");
         exitButton.setToolTipText("종료");
-
+        
         ToolTipManager manager = ToolTipManager.sharedInstance();
         manager.setInitialDelay(200); // 초기 툴팁 출력 지연 시간을 0.2초로 설정
         manager.setDismissDelay(1000); // 툴팁 지속 시간을 1초로 설정

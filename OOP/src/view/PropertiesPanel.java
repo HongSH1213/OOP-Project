@@ -249,7 +249,7 @@ public class PropertiesPanel extends JPanel {
 				}
 
 			} else if (temp.getName().equals("text")) {
-				ok = Pattern.matches("[\\w|' ']+", temp.getText());
+				ok = Pattern.matches("[^\\n]+", temp.getText());
 				if (ok) {
 					if (item.getClass().getSimpleName().equals("HFrame")) {
 						((HFrame) item).setTitle(temp.getText());
@@ -307,7 +307,9 @@ public class PropertiesPanel extends JPanel {
 				temp.addMouseListener(itemMouseListener);
 				temp.addMouseMotionListener(itemMouseListener);
 				temp.addKeyListener(itemKeyListener);
-
+				temp.setOpaque(true);
+				temp.setBackground(new Color(0,255,255));
+				
 				parent.remove(lbl);
 				parent.add(temp);
 				parent.repaint();
@@ -323,6 +325,8 @@ public class PropertiesPanel extends JPanel {
 				temp.addMouseListener(itemMouseListener);
 				temp.addMouseMotionListener(itemMouseListener);
 				temp.addKeyListener(itemKeyListener);
+				temp.setOpaque(true);
+                temp.setBackground(new Color(255,255,102));
 
 				parent.remove(btn);
 				parent.add(temp);
